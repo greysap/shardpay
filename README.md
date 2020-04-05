@@ -3,7 +3,7 @@ pronounced like
 ![Shar-Pei](https://upload.wikimedia.org/wikipedia/commons/0/05/Adult_sharpei.jpg)
 
 ### Description
-This is an implementation of imaginary payment service that works with sharded database. The serice receives list of payments and responds with total amount of payments of specified payer.
+This is an implementation of imaginary payment service that works with sharded database. The service takes list of payments and responds with total amount of payments of specified payer.
 Payment has following fields:
 * payer (who sends the money)
 * payee (who receives the money)

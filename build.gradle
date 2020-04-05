@@ -1,0 +1,86 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+	id 'nu.studer.jooq' version '4.1'
+}
+
+group = 'house.greysap'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-jooq'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compile group: 'org.apache.shardingsphere', name: 'sharding-jdbc-spring-boot-starter', version: '4.0.1'
+
+	compileOnly 'org.projectlombok:lombok'
+
+	runtimeOnly 'org.postgresql:postgresql'
+	jooqRuntime 'org.postgresql:postgresql'
+
+	implementation 'org.jooq:jooq'
+	implementation 'javax.annotation:javax.annotation-api:1.3.2'
+
+	// JAX-B dependencies for JDK 9+
+	implementation "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2"
+	implementation "org.glassfish.jaxb:jaxb-runtime:2.3.2"
+
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
+// This is for code generation
+//jooq {
+//	sample(sourceSets.main) {
+//		jdbc {
+//			driver = 'org.postgresql.Driver'
+//			url = 'jdbc:postgresql://localhost:5432/testdb0'
+//			user = 'postgres'
+//			password = 'your_password_here'
+//		}
+//		generator {
+//			name = 'org.jooq.codegen.DefaultGenerator'
+//			database {
+//				name = 'org.jooq.meta.postgres.PostgresDatabase'
+//				inputSchema = 'public'
+//				includes = '.*'
+//				excludes = ''
+//			}
+//			target {
+//				packageName = 'house.greysap.sample'
+//			}
+//		}
+//	}
+//}
+//
+//tasks.generateSampleJooqSchemaSource.with {
+//	def out = new ByteArrayOutputStream()
+//	javaExecSpec = { JavaExecSpec s ->
+//		s.standardOutput = out
+//		s.errorOutput = out
+//		s.ignoreExitValue = true
+//		s.jvmArgs '-Xmx512M'
+//	}
+//	execResultHandler = { ExecResult r ->
+//		if (r.exitValue != 0) {
+//			throw new RuntimeException('jOOQ source code generation failed:\n\n' + out.toString())
+//		}
+//	}
+//}

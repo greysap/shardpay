@@ -50,3 +50,7 @@ Java 11, Spring MVC, PostgreSQL, jOOQ, Sharding-JDBC, Gradle.
 * Distributed transactions.
 * API Authentication & Authorization.
 * Unit-tests (only basic functional test was written).
+
+### Known issues
+* Validation of requests is absent.
+* "mod 3" hash function distribution is not very uniform.
